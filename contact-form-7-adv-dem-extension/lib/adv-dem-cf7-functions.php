@@ -1,22 +1,23 @@
 <?php
-  add_filter( 'wpcf7_editor_panels', 'show_adv_dem_metabox' );
-add_action( 'wpcf7_after_save', 'wpcf7_adv_dem_save_advdem' );
-add_filter('wpcf7_form_response_output', 'adv_dem_author_wpcf7', 40,4);
-add_action( 'wpcf7_before_send_mail', 'wpcf7_adv_dem_subscribe' );
-add_filter( 'wpcf7_form_class_attr', 'adv_dem_class_attr' );
-add_action( 'wp_ajax_adv_dem_cf7_get_customfields', 'adv_dem_cf7_get_customfields' );
-add_action( 'wp_ajax_adv_dem_cf7_add_customfields', 'adv_dem_cf7_add_customfields' );
-add_action( 'wp_ajax_adv_dem_cf7_add_list', 'adv_dem_cf7_add_list' );
+/**
+ * WPCF7 Filters and Actions
+ */
+add_action( 'wpcf7_after_save'			, 'wpcf7_adv_dem_save_advdem' );
+add_filter( 'wpcf7_editor_panels'		, 'wpcf7_show_adv_dem_metabox' );
+add_filter( 'wpcf7_form_response_output', 'wpcf7_adv_dem_author', 40, 4);
+add_action( 'wpcf7_before_send_mail'	, 'wpcf7_adv_dem_subscribe' );
+add_filter( 'wpcf7_form_class_attr'		, 'wpcf7_adv_dem_class_attr' );
 
-function wpcf7_adv_dem_add_advdem($args) {
-	$cf7_adv_dem_defaults = array();
-	$cf7_adv_dem = get_option( 'cf7_adv_dem_'.$args->id(), $cf7_adv_dem_defaults );
-	$host = esc_url_raw( $_SERVER['HTTP_HOST'] );
-	$url = $_SERVER['REQUEST_URI'];
-	$urlactual = $url;
-	include ADV_DEM_CF7_PLUGIN_DIR . '/lib/adv-dem-cf7-view.php';
-}
+/**
+ * Custom Ajax actions for plugin
+ */
+add_action( 'wp_ajax_adv_dem_cf7_get_customfields'	, 'adv_dem_cf7_ajax_get_customfields' );
+add_action( 'wp_ajax_adv_dem_cf7_add_customfields'	, 'adv_dem_cf7_ajax_add_customfields' );
+add_action( 'wp_ajax_adv_dem_cf7_add_list'			, 'adv_dem_cf7_ajax_add_list' );
 
+/**
+ * 4Dem - wpcf7_afeter_save custom function
+ */
 function wpcf7_adv_dem_save_advdem($args) {
 	if (!empty($_POST)){
 		if( $_POST['wpcf7-adv-dem']['list'] == "newList"){
@@ -26,10 +27,13 @@ function wpcf7_adv_dem_save_advdem($args) {
 	}
 }
 
-function show_adv_dem_metabox ( $panels ) {
+/**
+ *4Dem - wpcf7_editor_panels custom function
+ */
+function wpcf7_show_adv_dem_metabox ( $panels ) {
 	$new_page = array(
 	    'adv-dem-Extension' => array(
-	      'title' => __( '4Dem.it Email Marketing' , ADV_DEM_CF7_TEXTDOMAIN ),
+	      'title' => esc_html__( '4Dem.it Email Marketing' , ADV_DEM_CF7_TEXTDOMAIN ),
 	      'callback' => 'wpcf7_adv_dem_add_advdem'
 	    )
 	  );
@@ -37,22 +41,40 @@ function show_adv_dem_metabox ( $panels ) {
 	return $panels;
 }
 
-function adv_dem_author_wpcf7( $adv_dem_supps, $class, $content, $args ) {
+/**
+ *4Dem - wpcf7_show_adv_dem_metabox callback
+ */
+function wpcf7_adv_dem_add_advdem($args) {
+	$cf7_adv_dem_defaults = array();
+	$cf7_adv_dem = get_option( 'cf7_adv_dem_'.$args->id(), $cf7_adv_dem_defaults );
+	$host = esc_url_raw( $_SERVER['HTTP_HOST'] );
+	$url = $_SERVER['REQUEST_URI'];
+	$urlactual = $url;
+	include ADV_DEM_CF7_PLUGIN_DIR . '/lib/adv-dem-cf7-view.php';
+}
+
+/**
+ *4Dem - wpcf7_form_response_output custom function
+ */
+function wpcf7_adv_dem_author( $adv_dem_supps, $class, $content, $args ) {
 	$cf7_adv_dem_defaults = array();
 	$cf7_adv_dem = get_option( 'cf7_adv_dem_'.$args->id(), $cf7_adv_dem_defaults );
 	$cfsupp = ( isset( $cf7_adv_dem['cf-supp'] ) ) ? $cf7_adv_dem['cf-supp'] : 0;
 	
 	if ( 1 == $cfsupp ) {
 		$adv_dem_supps .= adv_dem_cf7_referer();
-		$adv_dem_supps .= adv_dem_author();
+		$adv_dem_supps .= adv_dem_cf7_author();
 	}
 	else {
 		$adv_dem_supps .= adv_dem_cf7_referer();
-		$adv_dem_supps .= '<!-- adv_dem extension -->';
+		$adv_dem_supps .= '<!-- 4Dem extension -->';
 	}
 	return $adv_dem_supps;
 }
 
+/**
+ *4Dem - custom plugin function
+ */
 function cf7_adv_dem_tag_replace( $pattern, $subject, $posted_data, $html = false ) {
 	if( preg_match($pattern,$subject,$matches) > 0) {
 		if ( isset( $posted_data[$matches[1]] ) ) {
@@ -77,6 +99,9 @@ function cf7_adv_dem_tag_replace( $pattern, $subject, $posted_data, $html = fals
 	return $subject;	
 }
 
+/**
+ *4Dem - wpcf7_before_send_mail custom function
+ */
 function wpcf7_adv_dem_subscribe($obj) {
 	$cf7_adv_dem = get_option( 'cf7_adv_dem_'.$obj->id() );
 	$submission = WPCF7_Submission::get_instance();
@@ -147,8 +172,7 @@ function wpcf7_adv_dem_subscribe($obj) {
 			catch (Exception $e) {
 				
 			}
-			// 			end catch
-			
+			// 			end catch		
 			
 		}
 		// 		end $subscribe
@@ -157,13 +181,18 @@ function wpcf7_adv_dem_subscribe($obj) {
 	
 }
 
-
-function adv_dem_class_attr( $class ) {
+/**
+ *4Dem - wpcf7_before_send_mail custom function
+ */
+function wpcf7_form_class_attr( $class ) {
 	$class .= ' adv-dem-ext-' . ADV_DEM_CF7_VERSION;
 	return $class;
 }
 
-function adv_dem_cf7_get_customfields() {
+/**
+ *4Dem - Define Ajax code for getting custom fields
+ */
+function adv_dem_cf7_ajax_get_customfields() {
 	$response = array();
 	$listId = $_POST['listId'];
 	$api   = trim($_POST['apikey']);
@@ -189,7 +218,10 @@ function adv_dem_cf7_get_customfields() {
 	wp_die();
 }
 
-function adv_dem_cf7_add_customfields() {
+/**
+ *4Dem - Define Ajax code for creating new custom fields
+ */
+function adv_dem_cf7_ajax_add_customfields() {
 	$listId = $_POST['listId'];
 	$api   = trim($_POST['apikey']);
 	$customFieldName = trim($_POST['customFieldName']);
@@ -210,13 +242,19 @@ function adv_dem_cf7_add_customfields() {
 	wp_die();
 }
 
+/**
+ *4Dem - Custom function for APIKey check and validation
+ */
 function check_apikey($apikey) {
 	$api_key = ( isset( $apikey ) )? $apikey : "" ;
 	$api_adv = new Adv_dem_cf7_InterfaceAPI($api_key);
 	return $api_adv->getRequestSuccessful();
 }
 
-function adv_dem_cf7_add_list() {
+/**
+ *4Dem - Define Ajax code for creating new recipients
+ */
+function adv_dem_cf7_ajax_add_list() {
 	$response = array();
 	$api   = trim($_POST['apikey']);
 	$listName = trim($_POST['listName']);
@@ -227,20 +265,20 @@ function adv_dem_cf7_add_list() {
 	if($adv_api->getRequestSuccessful()){
 		$response['success'] = true;
 		$response['data'] = $listId;
-		$response['message'] = __("List created successfully!", ADV_DEM_CF7_TEXTDOMAIN);
+		$response['message'] = esc_html__("List created successfully!", ADV_DEM_CF7_TEXTDOMAIN);
 	}
 	else{
 		$response['success'] = false;
 		$response['data'] = $listId;
 		switch($adv_api->getLastError()){
 			case 400: 
-			        $response['message'] = __("List's name is already present on the console. Rename or remove the list and try again.", ADV_DEM_CF7_TEXTDOMAIN);
+			        $response['message'] = esc_html__("List's name is already present on the console. Rename or remove the list and try again.", ADV_DEM_CF7_TEXTDOMAIN);
 			break;
 			case 403: 
-			        $response['message'] = __('You have reached the maximum number of lists allowed for your console. Unable to create a new list.', ADV_DEM_CF7_TEXTDOMAIN);
+			        $response['message'] = esc_html__('You have reached the maximum number of lists allowed for your console. Unable to create a new list.', ADV_DEM_CF7_TEXTDOMAIN);
 			break;
 			default: 
-			        $response['message'] = __('Error creating the list.', ADV_DEM_CF7_TEXTDOMAIN);
+			        $response['message'] = esc_html__('Error creating the list.', ADV_DEM_CF7_TEXTDOMAIN);
 			break;
 		}
 	}

@@ -1,6 +1,6 @@
 jQuery(document).ready(function() {
 
-    try {
+
 
         if (!jQuery('#wpcf7-adv-dem-cf-active').is(':checked'))
 
@@ -26,11 +26,11 @@ jQuery(document).ready(function() {
 
         jQuery(".adv-dem-trigger").click(function() {
 
-            jQuery(".adv-dem-support").slideToggle("fast");
+            jQuery(".cf7-adv-dem-advanced-fields").slideToggle("fast");
 
             jQuery(this).text(function(i, text) {
                 return text === "Show advanced settings" ? "Hide advanced settings" : "Show advanced settings";
-            })
+            });
 
             return false; //Prevent the browser jump to the link anchor
 
@@ -49,8 +49,5 @@ jQuery(document).ready(function() {
         });
 
 
-    } catch (e) {
-
-    }
 
 });

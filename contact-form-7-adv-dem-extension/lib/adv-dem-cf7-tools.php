@@ -1,23 +1,7 @@
 <?php
-/* 
-    *1: By default the key label for the name must be FNAME
-    *2: parse first & last name
-    *3: ensure we set first and last name exist
-    *4: otherwise user provided just one name
-    *5: By default the key label for the name must be FNAME
-    *6: check if subscribed
-    *bh: email_type
-    *aw: double_optin
-    *xz: update_existing
-    *rd: replace_interests
-    *gr: send_welcome
-*/
+function adv_dem_cf7_author() {
 
-
-
-function adv_dem_author() {
-
-	$author_pre = __('Contact form 7 4Dem.it extension by ', ADV_DEM_CF7_TEXTDOMAIN);
+	$author_pre = esc_html__('Contact form 7 4Dem.it extension by ', ADV_DEM_CF7_TEXTDOMAIN);
 	$author_name = '';
 	$author_url = '';
 	$author_title = '';

@@ -17,20 +17,6 @@
 
 global $wpdb;
 
-function vc_utm() {
-
-  global $wpdb;
-
-  $utms  = '?utm_source=adv-dem';
-  $utms .= '&utm_campaign=w' . get_bloginfo( 'version' ) .'c' . WPCF7_VERSION . ( defined( 'WPLANG' ) && WPLANG ? WPLANG : 'en_US' ) . '';
-  $utms .= '&utm_medium=cme-' . ADV_DEM_CF7_VERSION . '';
-  $utms .= '&utm_term=F' . ini_get( 'allow_url_fopen' ) . 'C' . ( function_exists( 'curl_init' ) ? '1' : '0' ) . 'P' . PHP_VERSION . 'S' . $wpdb->db_version() . '';
-  // $utms .= '&utm_content=';
-
-  return $utms;
-
-}
-
 $apikey = (isset($cf7_adv_dem['api']))? $cf7_adv_dem['api'] : "";
 $check_apikey = check_apikey($apikey);
 $recipientInfo = "";
@@ -48,25 +34,25 @@ if($apikey != "" ){
 
 ?>
 
-<h2><?php echo ADV_DEM_CF7_AGENCY_NAME." ".__('Extension', ADV_DEM_CF7_TEXTDOMAIN); ?> </h2>
+<h2><?php echo ADV_DEM_CF7_AGENCY_NAME." ".esc_html__('Extension', ADV_DEM_CF7_TEXTDOMAIN); ?> </h2>
 
 <div class="adv-dem-main-fields">
 
 
-  <p class="mail-field">
-    <label for="wpcf7-adv-dem-api"><?php echo esc_html( __( 'APIKey:', ADV_DEM_CF7_TEXTDOMAIN ) ); ?> </label><br />
+  <p class="cf7-adv-dem-mail-field">
+    <label for="wpcf7-adv-dem-api"><?php echo esc_html( esc_html__( 'APIKey:', ADV_DEM_CF7_TEXTDOMAIN ) ); ?> </label><br />
     <input type="text" id="wpcf7-adv-dem-api" name="wpcf7-adv-dem[api]" class="wide" size="70" placeholder=" " value="<?php echo $apikey; ?>" />
-    <small class="description">f5a5-2a37-fe0c-bgfd-f101-0fgf-d562-5248 << <?php echo __("A number like this", ADV_DEM_CF7_TEXTDOMAIN); ?></small>
+    <small class="cf7-adv-dem-description">f5a5-2a37-fe0c-bgfd-f101-0fgf-d562-5248 << <?php echo esc_html__("A number like this", ADV_DEM_CF7_TEXTDOMAIN); ?></small>
   </p>
 
-  <p class="notapikey"><?php echo __("Insert a correct ApiKey to work with adv_dem!", ADV_DEM_CF7_TEXTDOMAIN); ?></p>
+  <p class="notapikey"><?php echo esc_html__("Insert a correct APIKey to work with 4Dem!", ADV_DEM_CF7_TEXTDOMAIN); ?></p>
 
   <div class="withapikey">
-  <p class="mail-field">
-    <label for="wpcf7-adv-dem-list"><?php echo __("Destination List:" , ADV_DEM_CF7_TEXTDOMAIN) ?></label><br />
+  <p class="cf7-adv-dem-mail-field">
+    <label for="wpcf7-adv-dem-list"><?php echo esc_html__("Destination List:" , ADV_DEM_CF7_TEXTDOMAIN) ?></label><br />
     <select class="wide"  id="wpcf7-adv-dem-list" name="wpcf7-adv-dem[list]">
-      <option value=""><?php echo __("NO LIST SELECTED" , ADV_DEM_CF7_TEXTDOMAIN) ?></option>
-      <option value="newList"><?php echo __("NEW LIST" , ADV_DEM_CF7_TEXTDOMAIN) ?></option>
+      <option value=""><?php echo esc_html__("NO LIST SELECTED" , ADV_DEM_CF7_TEXTDOMAIN) ?></option>
+      <option value="newList"><?php echo esc_html__("NEW LIST" , ADV_DEM_CF7_TEXTDOMAIN) ?></option>
       <?php
         if( count($recipientList) > 0 ) {
           foreach ($recipientList['data'] as $recipient) {						
@@ -76,47 +62,47 @@ if($apikey != "" ){
     </select>
   </p>
 
-  <p class="mail-field" id="new-list-name">
-    <label for="wpcf7-adv-dem-newlist"><?php echo esc_html( __( 'List Name:', ADV_DEM_CF7_TEXTDOMAIN ) ); ?></label><br />
-    <input type="text" id="wpcf7-adv-dem-newlist" class="wide" size="70" placeholder="<?php echo __("Insert the new list's name", ADV_DEM_CF7_TEXTDOMAIN) ?>" /><br /><br />
+  <p class="cf7-adv-dem-mail-field" id="new-list-name">
+    <label for="wpcf7-adv-dem-newlist"><?php echo esc_html( esc_html__( 'List Name:', ADV_DEM_CF7_TEXTDOMAIN ) ); ?></label><br />
+    <input type="text" id="wpcf7-adv-dem-newlist" class="wide" size="70" placeholder="<?php echo esc_html__("Insert the new list's name", ADV_DEM_CF7_TEXTDOMAIN) ?>" /><br /><br />
     <input type="checkbox" id="wpcf7-adv-dem-double-opt-in" value="1" />
-    <label for="wpcf7-adv-dem-double-opt-in"><?php echo esc_html( __( 'Enable Double Opt-in (checked = true)', ADV_DEM_CF7_TEXTDOMAIN ) ); ?>  </label><br /><br />
-    <button class="button-secondary" id="wpcf7-adv-dem-add-list-button"><?php echo __( 'ADD', ADV_DEM_CF7_TEXTDOMAIN ); ?></button>     
+    <label for="wpcf7-adv-dem-double-opt-in"><?php echo esc_html( esc_html__( 'Enable Double Opt-in (checked = true)', ADV_DEM_CF7_TEXTDOMAIN ) ); ?>  </label><br /><br />
+    <button class="button-secondary" id="wpcf7-adv-dem-add-list-button"><?php echo esc_html__( 'ADD', ADV_DEM_CF7_TEXTDOMAIN ); ?></button>     
   </p>
 
   <p class="nolist">
-    <?php echo __("List subscription mode: ", ADV_DEM_CF7_TEXTDOMAIN). '<span id="opt-in-mode"></span> ' . __("Opt-in", ADV_DEM_CF7_TEXTDOMAIN) ; ?>
+    <?php echo esc_html__("List subscription mode: ", ADV_DEM_CF7_TEXTDOMAIN). '<span id="opt-in-mode"></span> ' . esc_html__("Opt-in", ADV_DEM_CF7_TEXTDOMAIN) ; ?>
   </p>
   <p class="nolist">
-    <?php echo __("List type: ", ADV_DEM_CF7_TEXTDOMAIN). '<span id="list-type"></span> ' ; ?>
+    <?php echo esc_html__("List type: ", ADV_DEM_CF7_TEXTDOMAIN). '<span id="list-type"></span> ' ; ?>
   </p>
 
-  <p class="mail-field nolist">
-    <label for="wpcf7-adv-dem-email"><?php echo esc_html( __( 'Subscriber Email:', ADV_DEM_CF7_TEXTDOMAIN ) ); ?></label><br />
+  <p class="cf7-adv-dem-mail-field nolist">
+    <label for="wpcf7-adv-dem-email"><?php echo esc_html( esc_html__( 'Subscriber Email:', ADV_DEM_CF7_TEXTDOMAIN ) ); ?></label><br />
     <input type="text" id="wpcf7-adv-dem-email" name="wpcf7-adv-dem[email]" class="wide" size="70" placeholder="" value="<?php echo (isset ( $cf7_adv_dem['email'] ) ) ? esc_attr( $cf7_adv_dem['email'] ) : ''; ?>" />
-    <small class="description"><?php echo adv_dem_cf7_mail_tags(); ?> << <?php echo __("you can use these mail-tags",ADV_DEM_CF7_TEXTDOMAIN); ?></small>
+    <small class="cf7-adv-dem-description"><?php echo adv_dem_cf7_mail_tags(); ?> << <?php echo esc_html__("you can use these mail-tags",ADV_DEM_CF7_TEXTDOMAIN); ?></small>
   </p>
 
-  <div class="cme-container adv-dem-support" style="display:none">
+  <div class="cf7-adv-dem-advanced-fields" style="display:none">
     <div class="nolist"> 
-      <p class="mail-field mt0">
-        <label for="wpcf7-adv-dem-accept"><?php echo esc_html( __( 'Acceptance Field:', ADV_DEM_CF7_TEXTDOMAIN ) ); ?> </label><br />
+      <p class="cf7-adv-dem-mail-field mt0">
+        <label for="wpcf7-adv-dem-accept"><?php echo esc_html( esc_html__( 'Acceptance Field:', ADV_DEM_CF7_TEXTDOMAIN ) ); ?> </label><br />
         <input type="text" id="wpcf7-adv-dem-accept" name="wpcf7-adv-dem[accept]" class="wide" size="70" placeholder="[opt-in] <= Leave Empty if you are NOT using the checkbox or read the link above" value="<?php echo (isset($cf7_adv_dem['accept'])) ? $cf7_adv_dem['accept'] : '';?>" />
-        <small class="description"><?php echo adv_dem_cf7_mail_tags(); ?>  << <?php echo __("you can use these mail-tags", ADV_DEM_CF7_TEXTDOMAIN); ?></small>
+        <small class="cf7-adv-dem-description"><?php echo adv_dem_cf7_mail_tags(); ?>  << <?php echo esc_html__("you can use these mail-tags", ADV_DEM_CF7_TEXTDOMAIN); ?></small>
       </p>
 
-      <p class="mail-field">
+      <p class="cf7-adv-dem-mail-field">
         <input type="checkbox" id="wpcf7-adv-dem-cf-active" name="wpcf7-adv-dem[cfactive]" value="1"<?php echo ( isset($cf7_adv_dem['cfactive']) ) ? ' checked="checked"' : ''; ?> />
-        <label for="wpcf7-adv-dem-cf-active"><?php echo esc_html( __( 'Use Custom Fields', ADV_DEM_CF7_TEXTDOMAIN ) ); ?>  </label>
+        <label for="wpcf7-adv-dem-cf-active"><?php echo esc_html( esc_html__( 'Use Custom Fields', ADV_DEM_CF7_TEXTDOMAIN ) ); ?>  </label>
       </p>
 
 
       <div class="adv-dem-custom-fields">
-        <p><?php echo __( 'In the following fields, you can use these mail-tags:', ADV_DEM_CF7_TEXTDOMAIN ); ?> <?php echo adv_dem_cf7_mail_tags(); ?></p>
+        <p><?php echo esc_html__( 'In the following fields, you can use these mail-tags:', ADV_DEM_CF7_TEXTDOMAIN ); ?> <?php echo adv_dem_cf7_mail_tags(); ?></p>
         <div class="col-6 nolist">
-          <label for="wpcf7-adv-dem-add-newcustomfieldname"><?php echo __( 'Add New Custom Field:', ADV_DEM_CF7_TEXTDOMAIN ); ?></label><br />
-          <input type="text" class="wide" size="22" id="wpcf7-adv-dem-add-newcustomfieldname" placeholder="<?php echo __( 'New Custom Field Name', ADV_DEM_CF7_TEXTDOMAIN ); ?>">
-          <button class="button-secondary" id="wpcf7-adv-dem-add-customfield-button"><?php echo __( 'ADD', ADV_DEM_CF7_TEXTDOMAIN ); ?></button>
+          <label for="wpcf7-adv-dem-add-newcustomfieldname"><?php echo esc_html__( 'Add New Custom Field:', ADV_DEM_CF7_TEXTDOMAIN ); ?></label><br />
+          <input type="text" class="wide" size="22" id="wpcf7-adv-dem-add-newcustomfieldname" placeholder="<?php echo esc_html__( 'New Custom Field Name', ADV_DEM_CF7_TEXTDOMAIN ); ?>">
+          <button class="button-secondary" id="wpcf7-adv-dem-add-customfield-button"><?php echo esc_html__( 'ADD', ADV_DEM_CF7_TEXTDOMAIN ); ?></button>
         </div>
 
         <div id="new-custom-fields">
@@ -134,7 +120,7 @@ if($apikey != "" ){
               
           <?php $i++; }
             }else{ ?>
-            <p><?php echo __( 'The list selected has not custom fields', ADV_DEM_CF7_TEXTDOMAIN ); ?></p>
+            <p><?php echo esc_html__( 'The list selected has not custom fields', ADV_DEM_CF7_TEXTDOMAIN ); ?></p>
           <?php }?>
 
 
@@ -149,7 +135,7 @@ if($apikey != "" ){
   </div>
 
     <p class="p-author nolist">
-      <a type="button" aria-expanded="false" class="adv-dem-trigger a-support "><?php echo __("Show advanced settings", ADV_DEM_CF7_TEXTDOMAIN) ; ?></a> &nbsp; 
+      <a type="button" aria-expanded="false" class="adv-dem-trigger cf7-adv-dem-support "><?php echo esc_html__("Show advanced settings", ADV_DEM_CF7_TEXTDOMAIN) ; ?></a> &nbsp; 
     </p>
 
     </div>
@@ -161,16 +147,6 @@ if($apikey != "" ){
 
         jQuery( "#toggle-sys" ).slideToggle(250);
 
-      });
-
-      jQuery('#wpcf7-adv-dem-add-newcustomfieldname').on('keydown',function(event){
-        event.preventDefault();
-        jQuery('#wpcf7-adv-dem-add-customfield-button').click();
-      });
-      
-      jQuery('#wpcf7-adv-dem-newlist').on('keydown',function(event){
-        event.preventDefault();
-        jQuery('#wpcf7-adv-dem-add-list-button').click();
       });
 
       if( jQuery('#wpcf7-adv-dem-list').val() == "newList" ){
@@ -202,8 +178,8 @@ if($apikey != "" ){
         var apikey = '<?php echo $apikey ?>';
         var listName = jQuery('#wpcf7-adv-dem-newlist').val();
         var doubleOptIn = jQuery('#wpcf7-adv-dem-double-opt-in:checked').length;
-        if(apikey == "") error = '<?php echo __("No APIKey", ADV_DEM_CF7_TEXTDOMAIN); ?>';
-        if(listName == "") error = '<?php echo __("No list name", ADV_DEM_CF7_TEXTDOMAIN); ?>';
+        if(apikey == "") error = '<?php echo esc_html__("No APIKey", ADV_DEM_CF7_TEXTDOMAIN); ?>';
+        if(listName == "") error = '<?php echo esc_html__("No list name", ADV_DEM_CF7_TEXTDOMAIN); ?>';
         if(!error){
           jQuery.post(
             ajaxurl, 
@@ -239,9 +215,9 @@ if($apikey != "" ){
         var listId = jQuery('#wpcf7-adv-dem-list').val();
         var apikey = '<?php echo $apikey ?>';
         var customFieldName = jQuery('#wpcf7-adv-dem-add-newcustomfieldname').val();
-        if(customFieldName == "") error = '<?php echo __("Name is required to add a new custom field", ADV_DEM_CF7_TEXTDOMAIN); ?>';
-        if(listId == "") error = '<?php echo __("No destination list selected", ADV_DEM_CF7_TEXTDOMAIN); ?>';
-        if(apikey == "") error = '<?php echo __("APIKey not found", ADV_DEM_CF7_TEXTDOMAIN); ?>';
+        if(customFieldName == "") error = '<?php echo esc_html__("Name is required to add a new custom field", ADV_DEM_CF7_TEXTDOMAIN); ?>';
+        if(listId == "") error = '<?php echo esc_html__("No destination list selected", ADV_DEM_CF7_TEXTDOMAIN); ?>';
+        if(apikey == "") error = '<?php echo esc_html__("APIKey not found", ADV_DEM_CF7_TEXTDOMAIN); ?>';
         if(!error){
           jQuery.post(
             ajaxurl, 
@@ -253,7 +229,6 @@ if($apikey != "" ){
             }, 
             function(response) {
               var result = jQuery.parseJSON(response);
-              // console.log(result);
               jQuery('#wpcf7-adv-dem-add-newcustomfieldname').val('');              
               jQuery('#wpcf7-adv-dem-add-customfield-button').removeAttr('disabled');          
               jQuery('#wpcf7-adv-dem-list').trigger('change');
@@ -272,7 +247,7 @@ if($apikey != "" ){
         if( jQuery(this).val() == "newList" ){
           jQuery('.nolist').hide('fast');
           jQuery('#new-list-name').show('fast');
-          var optionTags = '<option value=""><?php echo __("The list selected has not custom fields" , ADV_DEM_CF7_TEXTDOMAIN) ?></option>';
+          var optionTags = '<option value=""><?php echo esc_html__("The list selected has not custom fields" , ADV_DEM_CF7_TEXTDOMAIN) ?></option>';
           jQuery('#new-custom-fields').html(optionTags);
         }else if(jQuery(this).val() == ""){
           jQuery('.nolist').hide('fast');
@@ -293,7 +268,6 @@ if($apikey != "" ){
             }, 
             function(response) {
               var result = jQuery.parseJSON(response);
-              // console.log(result);
               var customfieldsinputs = '';
               if(result.successAuth){
                 if(result.success){
@@ -306,17 +280,17 @@ if($apikey != "" ){
                     }
                     jQuery('#new-custom-fields').html(customfieldsinputs);
                   }else{
-                    customfieldsinputs = '<p><?php echo __("The list selected has not custom fields" , ADV_DEM_CF7_TEXTDOMAIN) ?></p>';
+                    customfieldsinputs = '<p><?php echo esc_html__("The list selected has not custom fields" , ADV_DEM_CF7_TEXTDOMAIN) ?></p>';
                     jQuery('#new-custom-fields').html(customfieldsinputs);
                   }
                 }else{
                     jQuery('#wpcf7-adv-dem-list').val("");
                     jQuery('#wpcf7-adv-dem-list').trigger("change");          
                     jQuery('#wpcf7-adv-dem-list option[value='+listId+']').remove();
-                    jQuery('#wpcf7-adv-dem-list').after('<p class="list-error-msg adv-msg" ><?php echo __("List not found in console, removed from the list", ADV_DEM_CF7_TEXTDOMAIN); ?></p>');
+                    jQuery('#wpcf7-adv-dem-list').after('<p class="list-error-msg adv-msg" ><?php echo esc_html__("List not found in console, removed from the list", ADV_DEM_CF7_TEXTDOMAIN); ?></p>');
                 }    
               }else{
-                console.log('auth error');
+                //console.log('auth error');
               }
             }
           );
