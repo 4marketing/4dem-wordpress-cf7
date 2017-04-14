@@ -85,13 +85,33 @@ function wpcf7_form_adv_dem_tags() {
 }
 
 
-function adv_dem_cf7_mail_tags() {
+function adv_dem_cf7_mail_tags($type) {
   $listatags = wpcf7_form_adv_dem_tags();
   $tag_submit = array_pop($listatags);
   $tagInfo = '';
-    foreach($listatags as $tag){
-      $tagInfo .= '<span class="mailtag code used">[' . $tag['name'].']</span>';
-    }
+  switch($type) {
+    
+    case 'email':     foreach($listatags as $tag){
+                        if($tag['basetype'] == 'email'){
+                          $tagInfo .= '<span class="mailtag code used">[' . $tag['name'].']</span>';
+                        }
+                      }
+                      break;
+    
+    case 'checkbox':    foreach($listatags as $tag){
+                        if($tag['basetype'] == 'checkbox'){
+                          $tagInfo .= '<span class="mailtag code used">[' . $tag['name'].']</span>';
+                        }
+                      }
+                      break;
+    case 'all':       foreach($listatags as $tag){
+                        $tagInfo .= '<span class="mailtag code used">[' . $tag['name'].']</span>';
+                      }
+                      break;
+
+    default: break;
+  }
+
   return $tagInfo;
 
 }

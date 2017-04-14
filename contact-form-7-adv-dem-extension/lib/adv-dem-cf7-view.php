@@ -79,16 +79,16 @@ if($apikey != "" ){
 
   <p class="cf7-adv-dem-mail-field nolist">
     <label for="wpcf7-adv-dem-email"><?php echo esc_html( esc_html__( 'Subscriber Email:', ADV_DEM_CF7_TEXTDOMAIN ) ); ?></label><br />
-    <input type="text" id="wpcf7-adv-dem-email" name="wpcf7-adv-dem[email]" class="wide" size="70" placeholder="" value="<?php echo (isset ( $cf7_adv_dem['email'] ) ) ? esc_attr( $cf7_adv_dem['email'] ) : ''; ?>" />
-    <small class="cf7-adv-dem-description"><?php echo adv_dem_cf7_mail_tags(); ?> << <?php echo esc_html__("you can use these mail-tags",ADV_DEM_CF7_TEXTDOMAIN); ?></small>
+    <input type="text" id="wpcf7-adv-dem-email" name="wpcf7-adv-dem[email]" class="wide" size="70" placeholder="<?php echo esc_html__("insert email field like this [your-email]","ADV_DEM_CF7_TEXTDOMAIN") ; ?>" value="<?php echo (isset ( $cf7_adv_dem['email'] ) ) ? esc_attr( $cf7_adv_dem['email'] ) : ''; ?>" />
+    <small class="cf7-adv-dem-description"><?php echo adv_dem_cf7_mail_tags('email'); ?> << <?php echo esc_html__("you can use these mail-tags",ADV_DEM_CF7_TEXTDOMAIN); ?></small>
   </p>
 
   <div class="cf7-adv-dem-advanced-fields" style="display:none">
     <div class="nolist"> 
       <p class="cf7-adv-dem-mail-field mt0">
         <label for="wpcf7-adv-dem-accept"><?php echo esc_html( esc_html__( 'Acceptance Field:', ADV_DEM_CF7_TEXTDOMAIN ) ); ?> </label><br />
-        <input type="text" id="wpcf7-adv-dem-accept" name="wpcf7-adv-dem[accept]" class="wide" size="70" placeholder="[opt-in] <= Leave Empty if you are NOT using the checkbox or read the link above" value="<?php echo (isset($cf7_adv_dem['accept'])) ? $cf7_adv_dem['accept'] : '';?>" />
-        <small class="cf7-adv-dem-description"><?php echo adv_dem_cf7_mail_tags(); ?>  << <?php echo esc_html__("you can use these mail-tags", ADV_DEM_CF7_TEXTDOMAIN); ?></small>
+        <input type="text" id="wpcf7-adv-dem-accept" name="wpcf7-adv-dem[accept]" class="wide" size="70" placeholder="<?php echo esc_html__("[opt-in] <= Leave Empty if you are NOT using the checkbox","ADV_DEM_CF7_TEXTDOMAIN") ; ?>" value="<?php echo (isset($cf7_adv_dem['accept'])) ? $cf7_adv_dem['accept'] : '';?>" />
+        <small class="cf7-adv-dem-description"><?php echo adv_dem_cf7_mail_tags('checkbox'); ?>  << <?php echo esc_html__("you can use these mail-tags", ADV_DEM_CF7_TEXTDOMAIN); ?></small>
       </p>
 
       <p class="cf7-adv-dem-mail-field">
@@ -98,7 +98,7 @@ if($apikey != "" ){
 
 
       <div class="adv-dem-custom-fields">
-        <p><?php echo esc_html__( 'In the following fields, you can use these mail-tags:', ADV_DEM_CF7_TEXTDOMAIN ); ?> <?php echo adv_dem_cf7_mail_tags(); ?></p>
+        <p><?php echo esc_html__( 'In the following fields, you can use these mail-tags:', ADV_DEM_CF7_TEXTDOMAIN ); ?> <?php echo adv_dem_cf7_mail_tags('all'); ?></p>
         <div class="col-6 nolist">
           <label for="wpcf7-adv-dem-add-newcustomfieldname"><?php echo esc_html__( 'Add New Custom Field:', ADV_DEM_CF7_TEXTDOMAIN ); ?></label><br />
           <input type="text" class="wide" size="22" id="wpcf7-adv-dem-add-newcustomfieldname" placeholder="<?php echo esc_html__( 'New Custom Field Name', ADV_DEM_CF7_TEXTDOMAIN ); ?>">
@@ -295,6 +295,18 @@ if($apikey != "" ){
             }
           );
         }
+      });
+
+      jQuery(".adv-dem-trigger").click(function() {
+
+          jQuery(".cf7-adv-dem-advanced-fields").slideToggle("fast");
+
+          jQuery(this).text(function(i, text) {
+              return text === "<?php echo esc_html__("Show advanced settings", ADV_DEM_CF7_TEXTDOMAIN) ; ?>" ? "<?php echo esc_html__("Hide advanced settings", ADV_DEM_CF7_TEXTDOMAIN) ; ?>" : "<?php echo esc_html__("Show advanced settings", ADV_DEM_CF7_TEXTDOMAIN) ; ?>";
+          });
+
+          return false; //Prevent the browser jump to the link anchor
+
       });
 
     });
