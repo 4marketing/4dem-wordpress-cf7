@@ -22,21 +22,6 @@ jQuery(document).ready(function() {
 
         });
 
-
-
-        jQuery(".adv-dem-trigger").click(function() {
-
-            jQuery(".cf7-adv-dem-advanced-fields").slideToggle("fast");
-
-            jQuery(this).text(function(i, text) {
-                return text === "Show advanced settings" ? "Hide advanced settings" : "Show advanced settings";
-            });
-
-            return false; //Prevent the browser jump to the link anchor
-
-        });
-
-
         jQuery(".adv-dem-trigger2").click(function() {
             jQuery(".adv-dem-support2").slideToggle("fast");
             return false; //Prevent the browser jump to the link anchor

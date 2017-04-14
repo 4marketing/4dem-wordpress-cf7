@@ -2,28 +2,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-11 12:37+0200\n"
-"PO-Revision-Date: 2017-04-11 10:50+0000\n"
+"POT-Creation-Date: 2017-04-14 12:38+0200\n"
+"PO-Revision-Date: 2017-04-14 12:40+0200\n"
+"Last-Translator: sviluppo <sviluppo@4marketing.it>\n"
 "Language-Team: Italian\n"
-"Plural-Forms: nplurals=2; plural=n != 1\n"
+"Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Loco - https://localise.biz/\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 2.0.1\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __\n"
-"Last-Translator: sviluppo <sviluppo@4marketing.it>\n"
-"Language: it-IT\n"
 "X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPath-1: lib"
-
-#: lib/adv-dem-cf7-view.php:88
-msgid "Opt-in"
-msgstr "Opt-in"
-
-#: lib/adv-dem-cf7-view.php:57
-msgid "APIKey:"
-msgstr "APIKey:"
+"X-Poedit-SearchPath-1: lib\n"
 
 #: cf7-adv-dem-ext.php:35
 msgid "Settings"
@@ -48,26 +40,22 @@ msgstr ""
 "Contact Form 7 è istallato ma deve essere attivato per poter utilizzare "
 "l'estensione per 4Dem.it."
 
-#: lib/adv-dem-cf7-activate.php:35
-msgid "Dismiss this notice."
-msgstr "Chiudi notifica."
-
-#: lib/adv-dem-cf7-functions.php:32
+#: lib/adv-dem-cf7-functions.php:36
 msgid "4Dem.it Email Marketing"
 msgstr "4Dem.it - Email Marketing"
 
-#: lib/adv-dem-cf7-functions.php:230
+#: lib/adv-dem-cf7-functions.php:268
 msgid "List created successfully!"
 msgstr "Lista creata con successo!"
 
-#: lib/adv-dem-cf7-functions.php:237
+#: lib/adv-dem-cf7-functions.php:275
 msgid ""
 "List's name is already present on the console. Rename or remove the list and "
 "try again."
 msgstr ""
 "Esiste già una lista con questo nome. Rimuoverla o rinominarla e riprovare."
 
-#: lib/adv-dem-cf7-functions.php:240
+#: lib/adv-dem-cf7-functions.php:278
 msgid ""
 "You have reached the maximum number of lists allowed for your console. "
 "Unable to create a new list."
@@ -75,119 +63,145 @@ msgstr ""
 "Hai raggiunto il numero massimo di liste consentite per il tuo account. "
 "Impossibile creare una nuova lista."
 
-#: lib/adv-dem-cf7-functions.php:243
+#: lib/adv-dem-cf7-functions.php:281
 msgid "Error creating the list."
 msgstr "Errore in fase di creazione della lista."
 
-#: lib/adv-dem-cf7-tools.php:20
+#: lib/adv-dem-cf7-tools.php:4
 msgid "Contact form 7 4Dem.it extension by "
 msgstr "Estensione 4Dem.it per Contact Form 7 creata da "
 
-#: lib/adv-dem-cf7-view.php:51
+#: lib/adv-dem-cf7-view.php:37
 msgid "Extension"
 msgstr "Estensione"
 
-#: lib/adv-dem-cf7-view.php:59
+#: lib/adv-dem-cf7-view.php:43
+msgid "APIKey:"
+msgstr "APIKey:"
+
+#: lib/adv-dem-cf7-view.php:45
 msgid "A number like this"
 msgstr "Un numero come questo"
 
-#: lib/adv-dem-cf7-view.php:62
-msgid "Insert a correct ApiKey to work with adv_dem!"
-msgstr "Inserisci una APIKey corretta per iniziare ad utilizzare 4Dem.it!"
+#: lib/adv-dem-cf7-view.php:48
+msgid "Insert a correct APIKey to work with 4Dem!"
+msgstr "Per utilizzare 4Dem devi inserire una APIKey valida!"
 
-#: lib/adv-dem-cf7-view.php:66
+#: lib/adv-dem-cf7-view.php:52
 msgid "Destination List:"
 msgstr "Lista di destinazione:"
 
-#: lib/adv-dem-cf7-view.php:68
+#: lib/adv-dem-cf7-view.php:54
 msgid "NO LIST SELECTED"
 msgstr "NESSUNA LISTA SELEZIONATA"
 
-#: lib/adv-dem-cf7-view.php:69
+#: lib/adv-dem-cf7-view.php:55
 msgid "NEW LIST"
 msgstr "CREA UNA NUOVA LISTA"
 
-#: lib/adv-dem-cf7-view.php:80
+#: lib/adv-dem-cf7-view.php:66
 msgid "List Name:"
 msgstr "Nome lista:"
 
-#: lib/adv-dem-cf7-view.php:81
+#: lib/adv-dem-cf7-view.php:67
 msgid "Insert the new list's name"
 msgstr "Inserisci il nome della nuova lista"
 
-#: lib/adv-dem-cf7-view.php:83
+#: lib/adv-dem-cf7-view.php:69
 msgid "Enable Double Opt-in (checked = true)"
 msgstr "Abilita Double Opt-In (selezione = vero)"
 
-#: lib/adv-dem-cf7-view.php:84 lib/adv-dem-cf7-view.php:119
+#: lib/adv-dem-cf7-view.php:70 lib/adv-dem-cf7-view.php:105
 msgid "ADD"
 msgstr "AGGIUNGI"
 
-#: lib/adv-dem-cf7-view.php:88
+#: lib/adv-dem-cf7-view.php:74
 msgid "List subscription mode: "
 msgstr "Modalità di iscrizione: "
 
-#: lib/adv-dem-cf7-view.php:91
+#: lib/adv-dem-cf7-view.php:74
+msgid "Opt-in"
+msgstr "Opt-in"
+
+#: lib/adv-dem-cf7-view.php:77
 msgid "List type: "
 msgstr "Tipologia lista: "
 
-#: lib/adv-dem-cf7-view.php:95
+#: lib/adv-dem-cf7-view.php:81
 msgid "Subscriber Email:"
 msgstr "Indirizzo email di iscrizione:"
 
-#: lib/adv-dem-cf7-view.php:97 lib/adv-dem-cf7-view.php:105
+#: lib/adv-dem-cf7-view.php:82
+msgid "insert email field like this [your-email]"
+msgstr "inserisci un campo email in questo modo [your-email]"
+
+#: lib/adv-dem-cf7-view.php:83 lib/adv-dem-cf7-view.php:91
 msgid "you can use these mail-tags"
 msgstr "puoi utilizzare questi tag"
 
-#: lib/adv-dem-cf7-view.php:103
+#: lib/adv-dem-cf7-view.php:89
 msgid "Acceptance Field:"
 msgstr "Campo di accettazione:"
 
-#: lib/adv-dem-cf7-view.php:110
+#: lib/adv-dem-cf7-view.php:90
+msgid "[opt-in] <= Leave Empty if you are NOT using the checkbox"
+msgstr "[opt-in] <= Lasciare vuoto se NON utilizzi la checkbox di controllo"
+
+#: lib/adv-dem-cf7-view.php:96
 msgid "Use Custom Fields"
 msgstr "Utilizza i Campi Personalizzati"
 
-#: lib/adv-dem-cf7-view.php:115
+#: lib/adv-dem-cf7-view.php:101
 msgid "In the following fields, you can use these mail-tags:"
 msgstr "Nei campi di seguito puoi utilizzare questi tag:"
 
-#: lib/adv-dem-cf7-view.php:117
+#: lib/adv-dem-cf7-view.php:103
 msgid "Add New Custom Field:"
 msgstr "Crea nuovo campo personalizzato:"
 
-#: lib/adv-dem-cf7-view.php:118
+#: lib/adv-dem-cf7-view.php:104
 msgid "New Custom Field Name"
 msgstr "Nome del nuovo campo personalizzato"
 
-#: lib/adv-dem-cf7-view.php:137 lib/adv-dem-cf7-view.php:275
-#: lib/adv-dem-cf7-view.php:309
+#: lib/adv-dem-cf7-view.php:123 lib/adv-dem-cf7-view.php:250
+#: lib/adv-dem-cf7-view.php:283
 msgid "The list selected has not custom fields"
 msgstr "La lista selezionata non ha campi personalizzati"
 
-#: lib/adv-dem-cf7-view.php:152
+#: lib/adv-dem-cf7-view.php:138 lib/adv-dem-cf7-view.php:305
 msgid "Show advanced settings"
 msgstr "Visualizza impostazioni avanzate"
 
-#: lib/adv-dem-cf7-view.php:205
+#: lib/adv-dem-cf7-view.php:181
 msgid "No APIKey"
 msgstr "APIkey non inserita"
 
-#: lib/adv-dem-cf7-view.php:206
+#: lib/adv-dem-cf7-view.php:182
 msgid "No list name"
 msgstr "Nome lista non impostato"
 
-#: lib/adv-dem-cf7-view.php:242
+#: lib/adv-dem-cf7-view.php:218
 msgid "Name is required to add a new custom field"
 msgstr "Inserire un nome per creare un campo personalizzato"
 
-#: lib/adv-dem-cf7-view.php:243
+#: lib/adv-dem-cf7-view.php:219
 msgid "No destination list selected"
 msgstr "Lista di iscrizione non impostata"
 
-#: lib/adv-dem-cf7-view.php:244
+#: lib/adv-dem-cf7-view.php:220
 msgid "APIKey not found"
 msgstr "APIkey non valida"
 
-#: lib/adv-dem-cf7-view.php:316
+#: lib/adv-dem-cf7-view.php:290
 msgid "List not found in console, removed from the list"
 msgstr "Lista non trovata"
+
+#: lib/adv-dem-cf7-view.php:305
+msgid "Hide advanced settings"
+msgstr "Nascondi impostazioni avanzate"
+
+#~ msgid "Dismiss this notice."
+#~ msgstr "Chiudi notifica."
+
+#~ msgid "Insert a correct ApiKey to work with adv_dem!"
+#~ msgstr "Inserisci una APIKey corretta per iniziare ad utilizzare 4Dem.it!"
