@@ -32,7 +32,7 @@ add_filter( 'plugin_row_meta', 'adv_dem_cf7_meta_links', 10, 2 );
 
 function adv_dem__cf7_settings_link( $links ) {
     $url = get_admin_url() . 'admin.php?page=wpcf7&post='.adv_dem_cf7_get_latest_item().'&active-tab=4' ;
-    $settings_link = '<a href="' . $url . '">' . __('Settings', ADV_DEM_CF7_TEXTDOMAIN) . '</a>';
+    $settings_link = '<a href="' . $url . '">' . esc_html__('Settings', ADV_DEM_CF7_TEXTDOMAIN) . '</a>';
     array_unshift( $links, $settings_link );
     return $links;
 }
