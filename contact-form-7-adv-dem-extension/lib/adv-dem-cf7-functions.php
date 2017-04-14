@@ -184,7 +184,7 @@ function wpcf7_adv_dem_subscribe($obj) {
 /**
  *4Dem - wpcf7_before_send_mail custom function
  */
-function wpcf7_form_class_attr( $class ) {
+function wpcf7_adv_dem_class_attr( $class ) {
 	$class .= ' adv-dem-ext-' . ADV_DEM_CF7_VERSION;
 	return $class;
 }

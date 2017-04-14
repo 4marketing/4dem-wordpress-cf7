@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Contact Form 7 4Dem.it Extension
-Version: 1.0.0
+Version: 1.0.3
 Plugin URI: 
 Description: Integrate Contact Form 7 with 4Dem.it email marketing platform. Automatically add form submissions to predetermined lists in 4Dem console, using its latest API.
 Author: 4marketing.it
